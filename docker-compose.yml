@@ -10,3 +10,10 @@ services:
       context: ./service-users
     ports:
       - 7051:3000
+  catalog:
+    networks:
+      - rentstream_net
+    build:
+      context: ./service-catalog
+    ports:
+      - 7052:3000
