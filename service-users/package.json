@@ -1,0 +1,47 @@
+{
+  "name": "typescript-microservice-starter",
+  "version": "1.2.0",
+  "description": "TypeScript microservice starter project.",
+  "main": "build",
+  "author": "Maksim Sinik <maksim@sinik.it>",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "npm run lint && rimraf ./build",
+    "build": "tsc -p ./tsconfig.json",
+    "start": "node --enable-source-maps build/index.js",
+    "update": "npx npm-check -u",
+    "prettier": "prettier --loglevel warn --write \"src/**/*.ts\"",
+    "lint": "eslint --fix --ext .ts \"src/**/*.ts\" ",
+    "dev:clean": "rimraf build",
+    "dev:build": "tsc --incremental -p tsconfig.json",
+    "dev:start": "node --inspect -r source-map-support/register -r dotenv/config build/index.js",
+    "dev": "cross-env NODE_ENV=development npm run dev:clean && nodemon -w src -e ts --exec \"npm run dev:build && npm run dev:start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nucleode/typescript-microservice-starter.git"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "make-promises-safe": "^5.1.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.14",
+    "@types/tap": "^14.10.1",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.15.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "source-map-support": "^0.5.19",
+    "tap": "^14.11.0",
+    "tap-mocha-reporter": "^5.0.1",
+    "typescript": "^4.1.3"
+  }
+}

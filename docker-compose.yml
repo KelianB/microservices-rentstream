@@ -1,0 +1,12 @@
+version: "3"
+networks:
+  rentstream_net:
+    external: true
+services:
+  users:
+    networks:
+      - rentstream_net
+    build:
+      context: ./service-users
+    ports:
+      - 7051:3000
