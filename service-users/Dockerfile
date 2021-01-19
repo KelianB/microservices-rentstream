@@ -22,7 +22,6 @@ RUN npm prune --production
 
 EXPOSE 3000
 
-# ENV NODE_ENV=production
-ENV NODE_ENV=staging
+ENV NODE_ENV=production
 
 CMD ["node", "./build"]
