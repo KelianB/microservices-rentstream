@@ -1,0 +1,1 @@
+export {catalogController} from "./catalogController";
