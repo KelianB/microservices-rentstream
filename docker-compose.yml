@@ -17,3 +17,10 @@ services:
       context: ./service-catalog
     ports:
       - 7052:3000
+  renting:
+    networks:
+      - rentstream_net
+    build:
+      context: ./service-renting
+    ports:
+      - 7053:3000
