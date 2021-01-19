@@ -8,14 +8,14 @@ export default function main(): void {
     }, 1000);
 };*/
 
-import dotenv from "dotenv"
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
-import app from "./app"
-import { logger } from "./logger"
+import app from "./app";
+import {logger} from "./logger";
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    logger.info(`Running on port ${PORT}`)
-})
+    logger.info(`Running on port ${PORT}`);
+});

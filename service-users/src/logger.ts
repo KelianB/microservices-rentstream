@@ -1,5 +1,5 @@
-import { createLogger, format, transports } from "winston"
-import pkg from "../package.json"
+import {createLogger, format, transports} from "winston";
+import pkg from "../package.json";
 
 const loggerTransports =
     process.env.NODE_ENV === "production"
@@ -24,14 +24,13 @@ const loggerTransports =
               new transports.Console(),
               new transports.Console({
                   format: format.combine(
-                      format.colorize({ all: false }),
+                      format.colorize({all: false}),
                       format.printf(
-                          ({ level, service, message, timestamp }) =>
-                              `${timestamp} [${service}] ${level}: ${message}`,
+                          ({level, service, message, timestamp}) => `${timestamp} [${service}] ${level}: ${message}`,
                       ),
                   ),
               }),
-          ]
+          ];
 
 export const logger = createLogger({
     level: "info",
@@ -39,10 +38,10 @@ export const logger = createLogger({
         format.timestamp({
             format: "YYYY-MM-DD HH:mm:ss",
         }),
-        format.errors({ stack: true }),
+        format.errors({stack: true}),
         format.splat(),
         format.json(),
     ),
-    defaultMeta: { service: pkg.name },
+    defaultMeta: {service: pkg.name},
     transports: loggerTransports,
-})
+});
