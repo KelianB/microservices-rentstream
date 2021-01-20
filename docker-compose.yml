@@ -24,3 +24,10 @@ services:
       context: ./service-renting
     ports:
       - 7053:3000
+  streaming:
+    networks:
+      - rentstream_net
+    build:
+      context: ./service-streaming
+    ports:
+      - 7054:3000
