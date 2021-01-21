@@ -6,7 +6,7 @@ import {logger} from "./logger";
 
 const PORT = process.env.PORT || 3000;
 
+// Start express server
 app.listen(PORT, () => {
     logger.info(`Running on port ${PORT}`);
 });
-

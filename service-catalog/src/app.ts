@@ -1,6 +1,6 @@
 import express from "express";
 import * as bodyParser from "body-parser"; // used to parse the form data that you pass in the request
-import router from "./router";
+import router from "./routes/catalog";
 import cors from "cors";
 
 class App {
@@ -20,7 +20,7 @@ class App {
             }),
         );
 
-        this.app.use("/", router);
+        this.app.use("/catalog", router);
     }
 }
 
