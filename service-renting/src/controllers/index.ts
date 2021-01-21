@@ -1,1 +1,0 @@
-export {rentingController} from "./rentingController";
