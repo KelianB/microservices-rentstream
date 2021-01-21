@@ -1,0 +1,26 @@
+{
+  "$id": "http://express-gateway.io/models/users.json",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "format": "email"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "birthdate": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "username",
+    "firstname",
+    "lastname",
+    "birthdate"
+  ]
+}

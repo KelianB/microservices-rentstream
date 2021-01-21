@@ -1,0 +1,31 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  host: 'gateway'
+apiEndpoints:
+  catalog:
+    host: '*'
+    paths: /catalog
+serviceEndpoints:
+  catalog:
+    url: 'http://catalog:3000'
+policies:
+  - basic-auth
+  - cors
+  - log
+  - proxy
+  - rate-limit
+pipelines:
+  default:
+    apiEndpoints:
+      - catalog
+    policies:
+      - log:
+        - action:
+            message: ${req.method} ${req.originalUrl}
+      # - basic-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: catalog 
+              changeOrigin: true
