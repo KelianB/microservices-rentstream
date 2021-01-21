@@ -20,7 +20,7 @@ class App {
             }),
         );
 
-        router.use("/renting", router);
+        this.app.use("/renting", router);
     }
 }
 

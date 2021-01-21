@@ -20,7 +20,7 @@ class App {
             }),
         );
 
-        router.use("/streaming", router);
+        this.app.use("/streaming", router);
     }
 }
 
