@@ -4,6 +4,9 @@ import {IUser} from "../models/user.model";
 
 const router = express.Router();
 
+/**
+ * Create a new user.
+ */
 router.post("/", async (req, res) => {
     const {email, firstName, lastName, dateOfBirth} = req.body;
     if (email && firstName && lastName && dateOfBirth) {
@@ -71,4 +74,4 @@ router.put("/users/:id/suggestions", (req, res) => {
     }
 });
 */
-export const usersRouter = router;
+export default router;
