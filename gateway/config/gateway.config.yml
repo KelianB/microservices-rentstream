@@ -6,10 +6,15 @@ admin:
 apiEndpoints:
   catalog:
     host: '*'
-    paths: /catalog
+    paths: /catalog/*
+  renting:
+    host: '*'
+    paths: /renting/*
 serviceEndpoints:
   catalog:
     url: 'http://catalog:3000'
+  renting:
+    url: 'http://renting:3000'
 policies:
   - basic-auth
   - cors
@@ -18,14 +23,25 @@ policies:
   - rate-limit
 pipelines:
   default:
+      apiEndpoints:
+        - catalog
+      policies:
+        - log:
+          - action:
+              message: ${req.method} ${req.originalUrl}
+        - proxy:
+            - action:
+                serviceEndpoint: catalog
+                changeOrigin: true
+  pipeline-renting:
     apiEndpoints:
-      - catalog
+      - renting
     policies:
       - log:
         - action:
             message: ${req.method} ${req.originalUrl}
-      # - basic-auth:
-      - proxy:
-          - action:
-              serviceEndpoint: catalog 
-              changeOrigin: true
+      - basic-auth:
+        - proxy:
+            - action:
+                serviceEndpoint: renting 
+                changeOrigin: true
