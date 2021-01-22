@@ -1,47 +1,57 @@
 http:
-  port: 8080
+    port: 8080
 admin:
-  port: 9876
-  host: 'gateway'
+    port: 9876
+    host: 'gateway'
 apiEndpoints:
-  catalog:
-    host: '*'
-    paths: /catalog/*
-  renting:
-    host: '*'
-    paths: /renting/*
+    catalog:
+        host: '*'
+        paths:
+            - /catalog
+            - /catalog/*
+    renting:
+        host: '*'
+        paths:
+            - /renting
+            - /renting/*
 serviceEndpoints:
-  catalog:
-    url: 'http://catalog:3000'
-  renting:
-    url: 'http://renting:3000'
+    catalog:
+        url: 'http://catalog:3000'
+    renting:
+        url: 'http://renting:3000'
 policies:
-  - basic-auth
-  - cors
-  - log
-  - proxy
-  - rate-limit
+    - basic-auth
+    - cors
+    - log
+    - proxy
+    - rate-limit
+    - request-transformer
 pipelines:
-  default:
-      apiEndpoints:
-        - catalog
-      policies:
-        - log:
-          - action:
-              message: ${req.method} ${req.originalUrl}
-        - proxy:
-            - action:
-                serviceEndpoint: catalog
-                changeOrigin: true
-  pipeline-renting:
-    apiEndpoints:
-      - renting
-    policies:
-      - log:
-        - action:
-            message: ${req.method} ${req.originalUrl}
-      - basic-auth:
-        - proxy:
-            - action:
-                serviceEndpoint: renting 
-                changeOrigin: true
+    pipeline-catalog:
+        apiEndpoints:
+            - catalog
+        policies:
+            - log:
+                - action:
+                    message: ${req.method} ${req.originalUrl}
+            - proxy:
+                - action:
+                    serviceEndpoint: catalog
+                    changeOrigin: true
+    pipeline-renting:
+        apiEndpoints:
+            - renting
+        policies:
+            - log:
+                - action:
+                    message: ${req.method} ${req.originalUrl}
+            - basic-auth:
+            - request-transformer:
+                action:
+                    body:
+                        add:
+                            user: req.user
+            - proxy:
+                - action:
+                    serviceEndpoint: renting 
+                    changeOrigin: true
