@@ -3,6 +3,12 @@
 First you will need to install Docker (this was all tested using Docker Desktop for Windows).  
 Then, simply run `docker-compose up --build` at the root of the project.
 
+# Technical info
+
+We use an express gateway in front of all other services to handle authentication.
+Since this is a prototype, creating users is handled directly using the admin endpoints provided by express gateway.
+In reality, another service would have to be created so we have more control.
+
 # Usage
 
 ## Authentication
@@ -30,7 +36,7 @@ Then, create credentials for your user :
 }
 ```
 
-The sever will generate a password, which will be given to you in the response.  
+The server will generate a password, which will be given to you in the response.  
 Copy that password somewhere.  
 You are now ready to make your first API requests.
 
