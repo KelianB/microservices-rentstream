@@ -9,7 +9,7 @@ router.get("/", (req: express.Request, res: express.Response) => {
 });
 
 router.get("/:id", (req: express.Request, res: express.Response) => {
-    const id = parseInt(req.params.id);
+    const {id} = req.params;
     const movie = movies.find((movie: Movie) => movie.id === id);
     if (movie) return res.status(200).json(movie);
     else return res.status(404).json({error: "Movie not found"});
@@ -17,7 +17,8 @@ router.get("/:id", (req: express.Request, res: express.Response) => {
 
 router.get("/search/:title", (req: express.Request, res: express.Response) => {
     const title = req.params.title;
-    const movie = movies.find((movie: Movie) => movie.title === title);
+    const search = title.trim().toLowerCase();
+    const movie = movies.find((movie: Movie) => movie.title.toLowerCase() === search);
     if (movie) return res.status(200).json(movie);
     else return res.status(404).json({error: "Movie not found"});
 });
