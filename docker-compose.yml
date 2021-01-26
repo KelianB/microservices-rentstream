@@ -21,6 +21,7 @@ services:
       - "dbdata:/data/db"
     networks:
       - rentstream_net
+    command: mongod --quiet --logpath /dev/null
 
   catalog:
     networks:
