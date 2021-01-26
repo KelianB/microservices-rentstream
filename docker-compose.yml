@@ -22,14 +22,6 @@ services:
     networks:
       - rentstream_net
 
-  users:
-    networks:
-      - rentstream_net
-    build:
-      context: ./service-users
-    depends_on: 
-      - database
-
   catalog:
     networks:
       - rentstream_net
@@ -51,3 +43,5 @@ services:
       - rentstream_net
     build:
       context: ./service-streaming
+    depends_on:
+      - database
