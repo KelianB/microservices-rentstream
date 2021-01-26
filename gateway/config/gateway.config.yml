@@ -14,11 +14,18 @@ apiEndpoints:
         paths:
             - /renting
             - /renting/*
+    streaming:
+        host: '*'
+        paths:
+            - /streaming
+            - /streaming/*
 serviceEndpoints:
     catalog:
         url: 'http://catalog:3000'
     renting:
         url: 'http://renting:3000'
+    streaming:
+        url: 'http://streaming:3000'
 policies:
     - basic-auth
     - cors
@@ -54,4 +61,21 @@ pipelines:
             - proxy:
                 - action:
                     serviceEndpoint: renting 
+                    changeOrigin: true
+    pipeline-streaming:
+        apiEndpoints:
+            - streaming
+        policies:
+            - log:
+                - action:
+                    message: ${req.method} ${req.originalUrl}
+            - basic-auth:
+            - request-transformer:
+                action:
+                    body:
+                        add:
+                            user: req.user
+            - proxy:
+                - action:
+                    serviceEndpoint: streaming 
                     changeOrigin: true
