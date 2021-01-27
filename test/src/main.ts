@@ -72,13 +72,15 @@ async function test(): Promise<string | null> {
         console.log("###### Testing service: streaming ######");
 
         console.log(`Streaming movie '${movie.title}'`);
-        let stream = await streamMovie(authKey, movie.id);
-        console.log("Response:", stream);
+        resp = await streamMovie(authKey, movie.id);
+        if (resp.status === 200 && resp.allowedToStream) console.log("Streaming is allowed as expected.");
+        else return "Unexpected response from /streaming with rented movie";
 
         const anotherMovie = await getRandomMovie();
         console.log(`Streaming another movie: '${anotherMovie.title}'`);
-        stream = await streamMovie(authKey, anotherMovie.id);
-        console.log("Response:", stream);
+        resp = await streamMovie(authKey, anotherMovie.id);
+        if (resp.status === 403) console.log("Streaming is fordbidden as expected.");
+        else return "Unexpected response from /streaming with non-rented movie";
 
         return null;
     }
@@ -102,7 +104,7 @@ async function getRentals(authKey: string) {
 
 async function setMoviePrice(authKey: string, movieId: string, price: number) {
     const verbose = false;
-    return request(BASE_URL + "/renting/price", "POST", {}, {movieId, price}, authKey, verbose);
+    return request(BASE_URL + "/renting/price/" + movieId, "POST", {}, {price}, authKey, verbose);
 }
 
 async function getPrice(authKey: string, movieId: string) {
