@@ -66,7 +66,6 @@ export async function request(
         });
 
         const json = {status: response.status, ...(await response.json())};
-        //if (response.status !== HttpStatusCode.NO_CONTENT) json = {...json, ...(await response.json())};
 
         if (verbose) {
             console.log(`Response from ${url}:`);
