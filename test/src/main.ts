@@ -40,7 +40,7 @@ async function test(): Promise<string | null> {
         console.log("Authentication key:", authKey);
         const movie = await getRandomMovie();
 
-        console.log("###### Testing service: pricing ######");
+        console.log("\n###### Testing service: pricing ######");
 
         console.log(`Setting price to 20$ for movie '${movie.title}'`);
         await setMoviePrice(authKey, movie.id, 20);
@@ -55,7 +55,7 @@ async function test(): Promise<string | null> {
             else return "The price is incorrect.";
         } else return "An error was raised while fetching the price.";
 
-        console.log("###### Testing service: renting ######");
+        console.log("\n###### Testing service: renting ######");
 
         console.log(`Renting movie '${movie.title}'`);
         await rentMovie(authKey, movie.id);
@@ -69,7 +69,7 @@ async function test(): Promise<string | null> {
             else return "Unable to find the rental";
         } else return "An error was raised while fetching rentals.";
 
-        console.log("###### Testing service: streaming ######");
+        console.log("\n###### Testing service: streaming ######");
 
         console.log(`Streaming movie '${movie.title}'`);
         resp = await streamMovie(authKey, movie.id);
@@ -79,7 +79,7 @@ async function test(): Promise<string | null> {
         const anotherMovie = await getRandomMovie();
         console.log(`Streaming another movie: '${anotherMovie.title}'`);
         resp = await streamMovie(authKey, anotherMovie.id);
-        if (resp.status === 403) console.log("Streaming is fordbidden as expected.");
+        if (resp.status === 403) console.log("Streaming is forbidden as expected.");
         else return "Unexpected response from /streaming with non-rented movie";
 
         return null;
