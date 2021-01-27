@@ -37,8 +37,9 @@ router.get("/", async (req: express.Request, res: express.Response) => {
 /**
  * Set the price for a movie
  */
-router.post("/price", async (req: express.Request, res: express.Response) => {
-    const {movieId, price, user} = req.body;
+router.post("/price/:movieId", async (req: express.Request, res: express.Response) => {
+    const {movieId} = req.params;
+    const {price, user} = req.body;
     // This is where we would verify that the user is allowed to change prices
     if (!user) {
         res.status(401).json({error: "Please authenticate"});
