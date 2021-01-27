@@ -22,6 +22,7 @@
     "dev": "cross-env NODE_ENV=development npm run dev:clean && nodemon -w src -e ts --exec \"npm run dev:build && npm run dev:start\""
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
