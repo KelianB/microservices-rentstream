@@ -6,10 +6,11 @@ type DatabaseConfig = {
     database: string;
 };
 
-const DB_OPTIONS = {
+const DB_OPTIONS: mongoose.ConnectOptions = {
     useNewUrlParser: true,
     useFindAndModify: false,
     useCreateIndex: true,
+    autoReconnect: true,
 };
 
 export async function connectToDatabase({host, port, database}: DatabaseConfig): Promise<void> {
